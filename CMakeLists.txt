@@ -7,19 +7,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
-set(TVM_ROOT /home/xianmu/whs/TVM/tvm)
+set(TVM_ROOT /home/xianmu/tvm)
 set(DMLC_CORE ${TVM_ROOT}/3rdparty/dmlc-core)
 
 
 
 # # ********************************************************************************************
-# 部署方式一： 需要编译 tvm_runtime ，将 模型调用.cpp 和 tvm_runtime 编译成一个可执行文件
+# 部署方式一： 重新编译 tvm_runtime
 message("deploy 1:")
 
 
 
 # 添加可执行文件
-set (SRC_LIST ${PROJECT_SOURCE_DIR}/src/cpp_deploy.cc
+set (SRC_LIST ${PROJECT_SOURCE_DIR}/src/Resnet50_deploy.cc
                     ${PROJECT_SOURCE_DIR}/src/tvm_runtime_pack.cc)
 add_executable (MyRunnable ${SRC_LIST})
 
@@ -39,7 +39,7 @@ target_link_libraries(MyRunnable PRIVATE dl pthread)
 
 
 # ********************************************************************************************
-# 部署方式二： 只将 模型调用.cpp 编译成可执行文件
+# 部署方式二： tvm_runtime.so 作为动态链接库编译
 message("deploy 2:")
 
 # 添加可执行文件
